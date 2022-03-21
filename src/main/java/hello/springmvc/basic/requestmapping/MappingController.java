@@ -32,6 +32,6 @@ public class MappingController {
     @GetMapping("/mapping/users/{userId}/orders/{orderId}")
     public String mappingPath(@PathVariable String userId, @PathVariable Long orderId) {
 
-        return userId + " " + orderId;
+        return userId + " and " + orderId;
     }
 }

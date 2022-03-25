@@ -2,6 +2,7 @@ package hello.springmvc.basic.requestmapping;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -41,6 +44,25 @@ public class RequestParamController {
         return "v44";
     }
 
+    @ResponseBody
+    @RequestMapping("/request-param-required")
+    public String requestParamRequired(
+            @RequestParam(required = true) String username,
+            @RequestParam(required = false) Integer age) {
+        log.info("username={}, age={}", username, age);
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-map")
+    public String requestParamMap(@RequestParam MultiValueMap<String, Object> paramMap) {
+
+        paramMap.keySet().iterator().forEachRemaining(str -> System.out.println("1"+paramMap.get(str)));
+
+        log.info("username={}, age={}", paramMap.get("username"),
+                paramMap.get("age"));
+        return "ok";
+    }
 }
 
 

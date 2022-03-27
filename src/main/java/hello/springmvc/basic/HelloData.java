@@ -9,4 +9,5 @@ import lombok.Data;
 public class HelloData {
     private String username = "default";
     private int age = 3;
+    private int date;
 }
